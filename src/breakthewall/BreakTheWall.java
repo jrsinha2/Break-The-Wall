@@ -11,24 +11,19 @@ import javax.swing.JFrame;
  *
  * @author Aditya Sinha
  */
-public class BreakTheWall {
+public class BreakTheWall implements GameConfig{
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        /**
-         * Creating Frame for Game
-         */
+    BreakTheWall() {
         JFrame obj = new JFrame();
-        obj.setBounds(10,10,700,600);
-        obj.setTitle("Break-The-Wall");
+        Gameplay gameplay = new Gameplay();
+        obj.setBounds(windowX,windowY,width,height);
+        obj.setTitle(gameTitle);
         obj.setResizable(false);
         obj.setVisible(true);
-        obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Gameplay gameplay = new Gameplay();
+        //obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         obj.add(gameplay);
     }
     
