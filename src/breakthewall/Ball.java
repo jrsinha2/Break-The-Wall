@@ -11,28 +11,31 @@ import java.awt.Color;
  * @author Aditya Sinha
  */
 public class Ball implements GameConfig{
-    private int ballposX;
-    private int ballposY; 
-    private int ballXdir;
-    private int ballYdir;
-    private int radius;
-    Color color;
+    public int ballposX;
+    public int ballposY; 
+    public int ballXdir;
+    public int ballYdir;
+    public int radius;
+    public Color color;
     
     public Ball() {
-        int maxposX = width - borderwidth;
-        int minposX = borderwidth;
-        int maxposY = (height/2);
-        final int minposY = 550;
-        this.ballYdir = -2;
-        this.ballXdir = -1;
-        
-        this.ballposX = (int) (Math.random()*(maxposX-minposX) + 1);
-        this.ballposY = (int) (Math.random()*(maxposY - minposY) + 1);
-        
-    
         //graphics
         this.radius = 20;
         color = Color.yellow;
+        
+        //config
+        int maxposX = GameConfig.width - borderwidth - 2*this.radius;
+        int minposX = borderwidth + 2*this.radius;
+        int minposY = (GameConfig.height/2) + 2*this.radius;
+        final int maxposY = 500 - 2*radius;
+        this.ballYdir = -2;
+        this.ballXdir = -1;
+        
+        this.ballposX = (int) (Math.random()*(maxposX-minposX) + minposX);
+        this.ballposY = (int) (Math.random()*(maxposY - minposY) + minposY);
+        
+    
+        
         
     }
     

@@ -5,6 +5,8 @@
  */
 package breakthewall;
 
+import java.awt.Color;
+
 
 
 /**
@@ -12,17 +14,27 @@ package breakthewall;
  * @author Aditya Sinha
  */
 public class Paddle implements GameConfig{
-    private int playerX;
-    private final int playerY;
-    private int speed;
+    public int playerX;
+    public final int playerY;
+    public final int width;
+    public final int height;
+    public int speed;
+    public Color color; 
     public Paddle() {
-        int maxposX = width - borderwidth;
+        
+        this.speed = 20;
+        this.color = Color.red;
+        this.width = 100;
+        this.height = 8;
+        
+        int maxposX = GameConfig.width - borderwidth;
         int minposX = borderwidth;
-        this.playerX = (int) (Math.random()*(maxposX - minposX));
+        this.playerX = GameConfig.width/2 - width/2;
         this.playerY = 550;     //final variable can be initialized in constructor
-        speed = 20;
+        
     }
     void changespeed(int s) {
         this.speed = s;
     }
+    
 }
