@@ -25,6 +25,11 @@ public class BreakTheWall implements GameConfig{
         obj.setVisible(true);
         //obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         obj.add(gameplay);
+        /*if(!gameplay.getStatus())
+            obj.setVisible(false);
+        else
+            obj.setVisible(true);
+        */
     }
     
 }

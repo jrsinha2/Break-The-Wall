@@ -17,11 +17,12 @@ public class Ball implements GameConfig{
     public int ballYdir;
     public int radius;
     public Color color;
+    public static int noBalls = 1;
     
     public Ball() {
         //graphics
         this.radius = 20;
-        color = Color.yellow;
+        this.color = Color.white;
         
         //config
         int maxposX = GameConfig.width - borderwidth - 2*this.radius;
@@ -34,9 +35,12 @@ public class Ball implements GameConfig{
         this.ballposX = (int) (Math.random()*(maxposX-minposX) + minposX);
         this.ballposY = (int) (Math.random()*(maxposY - minposY) + minposY);
         
-    
-        
-        
+    }
+    public static int getNoBalls() {
+        return noBalls;
+    }
+    public static void setNoBalls(int b) {
+        noBalls = b;
     }
     
     
