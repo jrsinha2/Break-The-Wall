@@ -89,8 +89,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
         
         if(totalBricks<=0) {
             play = false;
-            ball.ballXdir = 0;
-            ball.ballYdir = 0;
+            Ball.setSpeed(0,0);
             
             g.setColor(Color.red);
             g.setFont(new Font("serif",Font.BOLD,30));
@@ -101,8 +100,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
         }
         if(ball.ballposY>paddle.playerY + paddle.height) {
             play = false;
-            ball.ballXdir = 0;
-            ball.ballYdir = 0;
+            Ball.setSpeed(0,0);
             g.setColor(Color.red);
             g.setFont(new Font("serif",Font.BOLD,30));
             g.drawString("Game Over, Score: "+score, 190, 300);  //x = 590 y  =30
@@ -142,8 +140,8 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
                 moveLeft();
             }
         }
-        if(e.getKeyCode()==KeyEvent.VK_UP) {
-            if(Paddle.getMovement() == true && !pause) {
+        if(e.getKeyCode()==KeyEvent.VK_UP && !pause) {
+            if(Paddle.getMovement() == true) {
                 if(paddle.playerY <= paddle.minlimitposY) {
                     paddle.playerY = paddle.minlimitposY;
                 }
@@ -161,9 +159,11 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(!play){
-                play  =true;
+            if(!play && !pause){
+                play  = false;
+                pause = false;
                 ball = new Ball();
+                Ball.resetSpeed();
                 score = 0;
                 paddle = new Paddle();
                 map = new MapGenerator();
@@ -172,7 +172,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            if(!pause)
+            if(!pause && play)
             {   pause = true;
                 play = false;
             }
@@ -186,22 +186,22 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
         
     public void moveRight() {
         play = true;
-        paddle.playerX+=paddle.speed; //move 20 pixels to right
+        paddle.playerX+=Paddle.speed; //move 20 pixels to right
     }
     
     public void moveLeft() {
         play = true;
-        paddle.playerX-=paddle.speed; //move 20 pixels to right
+        paddle.playerX-=Paddle.speed; //move 20 pixels to right
     }
     
     public void moveUp() {
         play = true;
-        paddle.playerY-=paddle.speed; //move 20 pixels to up
+        paddle.playerY-=Paddle.speed; //move 20 pixels to up
     }
     
     public void moveDown() {
         play = true;
-        paddle.playerY+=paddle.speed; //move 20 pixels to up
+        paddle.playerY+=Paddle.speed; //move 20 pixels to up
     }
     
     @Override
@@ -214,7 +214,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
             Rectangle ballrect = new Rectangle(ball.ballposX,ball.ballposY,ball.radius,ball.radius);
             Rectangle paddlerect = new Rectangle(paddle.playerX,paddle.playerY,paddle.width,paddle.height);
             if(ballrect.intersects(paddlerect))
-                ball.ballYdir = -ball.ballYdir;
+                ball.reverseY();
             
             A: for(int i =0;i<map.map.length;i++)
             {
@@ -233,30 +233,30 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
                             score+=1;
                         
                             if(ball.ballposX + 19 <= brickrect.x || ball.ballposX+1>=brickrect.x+brickrect.width ){
-                                ball.ballXdir*=-1; 
+                                ball.reverseX();
                             }
                             else
-                                ball.ballYdir*=-1;
+                                ball.reverseY();
                             break A;
                         }
                     }
                 }
             }
             
-            ball.ballposX+=ball.ballXdir;
-            ball.ballposY+=ball.ballYdir;
+            ball.ballposX+=Ball.getSpeed()[0];
+            ball.ballposY+=Ball.getSpeed()[1];
             
             //left border
             if(ball.ballposX < 0) 
-                ball.ballXdir = -ball.ballXdir;
+                ball.reverseX();
             
             //left border
             if(ball.ballposX > width - 20)  //20 is ball radius 
-                ball.ballXdir = -ball.ballXdir;
+                ball.reverseX();
             
             //top
             if(ball.ballposY < 0) 
-                ball.ballYdir = -ball.ballYdir;
+                ball.reverseY();
         }
         repaint();
     }
