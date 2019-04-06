@@ -13,8 +13,9 @@ import java.awt.Color;
 public class Ball implements GameConfig{
     public int ballposX;
     public int ballposY; 
-    public static int ballXdir = -2;
-    public static int ballYdir = -4;
+    public static int ballXdir = -1;
+    public static int ballYdir = -2;
+    public static int speedOfball = 1;
     public int radius;
     public Color color;
     public static int noBalls = 1;
@@ -42,8 +43,8 @@ public class Ball implements GameConfig{
         noBalls = b;
     }
     public static void resetSpeed() {
-        ballXdir = -2;
-        ballYdir = -4;
+        ballXdir = -speedOfball;
+        ballYdir = -2*speedOfball;
     }
     public static void setSpeed(int x,int y) {
         ballXdir = x;
@@ -55,14 +56,18 @@ public class Ball implements GameConfig{
         speed[1] = ballYdir;
         return speed;
     } 
-    public static void changeLevel(int l) {
-        ballXdir *= l;
-        ballYdir *= l;
+    public static void changeSpeed(int s) {
+        ballXdir = -s;
+        ballYdir = -2*s;
+        speedOfball = s;
     }
     public void reverseY() {
         ballYdir *= -1;
     }
     public void reverseX() {
         ballXdir *= -1;
+    }
+    public static int getSpeedLevel() {
+        return speedOfball;
     }
 }

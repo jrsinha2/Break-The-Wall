@@ -38,7 +38,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
     private int score = 0;
     private int totalBricks = 150;  //7x3
     private Timer timer;
-    private int delay = 8;
+    private int delay = 1;
     
     private Paddle paddle;
     private Ball ball;
@@ -49,6 +49,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
         totalBricks = map.getTotalBricks();
         paddle = new Paddle();
         ball = new Ball();
+        Ball.resetSpeed();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
