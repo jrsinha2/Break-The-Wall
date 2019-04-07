@@ -45,6 +45,38 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
     private Ball ball;
     private MapGenerator map;
     static int noGameWindow = 0;
+    public static int difficulty = 0; 
+    public static String getDifficulty() {
+        switch(difficulty) {
+            case 0: return "DIFFICULTY";
+                    
+            case 1: return "EASY";
+                    
+            case 2: return "MEDIUM";
+                    
+            case 3: return "HARD";
+                    
+            case 4: return "INSANE";
+                    
+            default: return "DIFFICULTY";
+           
+        }
+    }
+    public static void changeDifficulty() {
+        
+        
+        int speedofBall = Ball.getSpeedLevel();
+            if(difficulty>0) {
+            speedofBall++;
+            speedofBall%=5;
+            if(speedofBall==0)
+                speedofBall++;
+            Ball.changeSpeed(speedofBall);
+        }
+        difficulty++;
+        difficulty%=5;
+        System.out.println(difficulty);
+    }
     public static int getNoWindow() {
         return noGameWindow;
     }
