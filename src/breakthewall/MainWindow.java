@@ -6,6 +6,7 @@
 package breakthewall;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -130,8 +131,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        BreakTheWall obj;
+        if(Gameplay.getNoWindow()==0)
+            obj = new BreakTheWall();
+        else {
+            JOptionPane.showMessageDialog(null,"Cannot open a new Window. Please close existing Window");
+        }
         
-        BreakTheWall obj = new BreakTheWall();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -145,8 +151,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Settings settings = new Settings();
-        settings.setVisible(true);
+        Settings settings;
+        if(Settings.getNoWindows()==0)
+        {   settings = new Settings();
+            settings.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Cannot open a new Window. Please close existing Window");
+        }
+            
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

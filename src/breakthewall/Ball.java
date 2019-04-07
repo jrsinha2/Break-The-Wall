@@ -57,8 +57,14 @@ public class Ball implements GameConfig{
         return speed;
     } 
     public static void changeSpeed(int s) {
-        ballXdir = -s;
-        ballYdir = -2*s;
+        if(ballXdir>0)
+            ballXdir = s;
+        else
+            ballXdir = -s;
+        if(ballYdir > 0)
+            ballYdir = 2*s;
+        else 
+            ballYdir = -2*s;
         speedOfball = s;
     }
     public void reverseY() {

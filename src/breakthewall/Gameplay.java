@@ -5,6 +5,7 @@
  */
 package breakthewall;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -43,8 +44,12 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
     private Paddle paddle;
     private Ball ball;
     private MapGenerator map;
-    
+    static int noGameWindow = 0;
+    public static int getNoWindow() {
+        return noGameWindow;
+    }
     public Gameplay() {
+        noGameWindow++;
         map = new MapGenerator();
         totalBricks = map.getTotalBricks();
         paddle = new Paddle();
