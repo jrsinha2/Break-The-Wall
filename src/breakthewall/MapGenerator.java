@@ -18,10 +18,9 @@ public class MapGenerator implements GameConfig{
     public int map[][];
     public int brickWidth;
     public int brickHeight;
-    public int row,col; 
+    public static int row = 8,col = 12; 
     public MapGenerator() {
-        row = 8;
-        col = 12;
+        
         map = new int[row][col];
         for(int i =0;i<map.length;i++)
         {
@@ -53,5 +52,15 @@ public class MapGenerator implements GameConfig{
     }
     public int getTotalBricks() {
         return row*col;
+    }
+    public static void setRowColumn(int r,int c) {
+        row = r;
+        col = c;
+    }
+    public static int[] getRowColumn() {
+        int dim[] = new int[2];
+        dim[0] = row;
+        dim[1]  =col;
+        return dim;
     }
 }

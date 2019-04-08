@@ -39,7 +39,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
     private int score = 0;
     private int totalBricks = 150;  //7x3
     private Timer timer;
-    private int delay = 1;
+    private int delay = 10;
     
     private Paddle paddle;
     private Ball ball;
@@ -65,14 +65,18 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
     public static void changeDifficulty() {
         
         
-        int speedofBall = Ball.getSpeedLevel();
-            if(difficulty>0) {
-            speedofBall++;
-            speedofBall%=5;
-            if(speedofBall==0)
-                speedofBall++;
-            Ball.changeSpeed(speedofBall);
-        }
+        int speedofBall;
+        switch(difficulty)
+        {   case 2: speedofBall = 2; 
+                    break;
+            case 3: speedofBall = 3; 
+                    break;
+            case 4: speedofBall = 4; 
+                    break;
+            default : speedofBall = 1;
+        }    
+        Ball.changeSpeed(speedofBall);
+        
         difficulty++;
         difficulty%=5;
         System.out.println(difficulty);
@@ -270,7 +274,7 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
                             totalBricks--;
                             score+=1;
                         
-                            if(ball.ballposX + 19 <= brickrect.x || ball.ballposX+1>=brickrect.x+brickrect.width ){
+                            if(ball.ballposX + 20 <= brickrect.x || ball.ballposX >=brickrect.x+brickrect.width ){
                                 ball.reverseX();
                             }
                             else
