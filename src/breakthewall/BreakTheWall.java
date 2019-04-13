@@ -25,6 +25,7 @@ public class BreakTheWall implements GameConfig{
         JFrame obj = new JFrame();
         Gameplay gameplay = new Gameplay();
         obj.setBounds(windowX,windowY,width,height);
+        obj.setLocation(250, 50);
         obj.setTitle(gameTitle);
         obj.setResizable(false);
         obj.setVisible(true);

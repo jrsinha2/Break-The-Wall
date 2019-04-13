@@ -39,14 +39,15 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
     private int score = 0;
     private int totalBricks = 150;  //7x3
     private Timer timer;
-    private int delay = 10;
+    private int delay = 2;
     
     private Paddle paddle;
     private Ball ball;
     private MapGenerator map;
     static int noGameWindow = 0;
     public static int difficulty = 0; 
-    public static String getDifficulty() {
+    
+    public static String getDifficulty(){
         switch(difficulty) {
             case 0: return "DIFFICULTY";
                     
@@ -62,10 +63,12 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
            
         }
     }
+    
     public static void changeDifficulty() {
         
-        
-        int speedofBall;
+        int speedofBall = 1;
+        difficulty++;
+        difficulty%=5;
         switch(difficulty)
         {   case 2: speedofBall = 2; 
                     break;
@@ -77,13 +80,14 @@ public class Gameplay extends JPanel implements KeyListener,ActionListener,GameC
         }    
         Ball.changeSpeed(speedofBall);
         
-        difficulty++;
-        difficulty%=5;
+        
         System.out.println(difficulty);
     }
+    
     public static int getNoWindow() {
         return noGameWindow;
     }
+    
     public Gameplay() {
         noGameWindow++;
         map = new MapGenerator();

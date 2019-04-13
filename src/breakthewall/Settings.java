@@ -78,6 +78,7 @@ public class Settings extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
 
+        setLocation(new java.awt.Point(250, 50));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
